@@ -9,14 +9,16 @@ const uuid = Uuid();
 
 final formatter = DateFormat.yMd(Platform.localeName);
 
-enum Category { sciFi, drama, horror, adventure, detective }
+enum SeriesCategories { sciFi, drama, horror, adventure, detective }
+
+enum SortingCriteria { name, rating, date, category }
 
 const icons = {
-  Category.sciFi: Icons.rocket_launch,
-  Category.drama: Icons.theater_comedy,
-  Category.horror: Icons.bug_report,
-  Category.adventure: Icons.directions_run,
-  Category.detective: Icons.local_police,
+  SeriesCategories.sciFi: Icons.rocket_launch,
+  SeriesCategories.drama: Icons.theater_comedy,
+  SeriesCategories.horror: Icons.bug_report,
+  SeriesCategories.adventure: Icons.directions_run,
+  SeriesCategories.detective: Icons.local_police,
 };
 
 class Series {
@@ -31,11 +33,33 @@ class Series {
   late String id, name, note;
   late double rating;
   late DateTime watchingDate;
-  late Category category;
+  late SeriesCategories category;
   late bool favorite = false;
 
   String get formattedDate {
     initializeDateFormatting(Platform.localeName);
     return formatter.format(watchingDate);
+  }
+
+  Series.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    note = json['note'];
+    rating = json['rating'];
+    watchingDate = DateTime.parse(json['watchingDate']);
+    category = SeriesCategories.values.firstWhere((element) => element.name == [json['category']]);
+    favorite = json['favorite'];
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'note': note,
+      'rating': rating,
+      'watchingDate': watchingDate.toString(),
+      'category': category.name,
+      'favorite': favorite,
+    };
   }
 }
