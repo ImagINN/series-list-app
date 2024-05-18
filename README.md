@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # series_list_app
 
 A new Flutter project.
@@ -15,6 +14,26 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-=======
-# series-list-app
->>>>>>> d79eda7115ba01d6397cb4a89bf853bd90b6c225
+
+        *            *            *            *
+      *   *        *   *        *   *        *   *
+    *       *    *       *    *       *    *       *
+      *   *        *   *        *   *        *   *
+        *            *            *            *
+
+## Dependencies That Need To Be Added
+- uuid -> *flutter pub add uuid*
+- intl -> *flutter pub add intl*
+- intl:any -> *flutter pub add intl:any* _To be able to use all versions_
+- rating bar -> *flutter pub add flutter_rating_bar*
+- localizations -> *flutter pub add flutter_localizations --sdk=flutter*
+- path provider -> *flutter pub add path_provider*
+- vertical bar chart -> *flutter pub add vertical_barchart*
+
+### See for additional documents
+- [uuid documents](https://pub.dev/packages/uuid)
+- [intl documents](https://pub.dev/packages/intl)
+- [rating bar documents](https://pub.dev/packages/flutter_rating_bar)
+- [localizations documents](https://pub.dev/packages/flutter_localization)
+- [path provider documents](https://pub.dev/packages/path_provider)
+- [bar charts documents](https://pub.dev/packages/flutter_charts)
