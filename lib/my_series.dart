@@ -18,13 +18,15 @@ class MySeries extends StatefulWidget {
 }
 
 class _MySeriesState extends State<MySeries> {
+  List<Series> _series = [];
+
+  final FileOperations _fileOperations = const FileOperations();
+
   SortingCriteria _sortingCriteria = SortingCriteria.name;
 
   bool _increased = true;
 
   IconData _icon = Icons.arrow_downward;
-
-  final FileOperations _fileOperations = const FileOperations();
 
   int categoryValue(SeriesCategories category) {
     return _series.where((element) => element.category == category).length;
@@ -54,47 +56,6 @@ class _MySeriesState extends State<MySeries> {
     return chartModel;
   }
 
-  List<Series> _series = [];
-  //   Series(
-  //     name: 'Breaking Bad',
-  //     note: 'Walter White becomes',
-  //     rating: 9.5,
-  //     watchingDate: DateTime(2021, 10, 1),
-  //     category: SeriesCategories.drama,
-  //   ),
-  //   Series(
-  //     name: 'Stranger Things',
-  //     note: 'A young girl with telekinetic abilities.',
-  //     rating: 8.7,
-  //     watchingDate: DateTime(2021, 10, 2),
-  //     category: SeriesCategories.sciFi,
-  //   ),
-  //   Series(
-  //     name: 'The Haunting of Hill House',
-  //     note:
-  //         'Flashing between past and present and back again, the series follows two families living in a haunted house.',
-  //     rating: 8.6,
-  //     watchingDate: DateTime(2021, 10, 3),
-  //     category: SeriesCategories.horror,
-  //   ),
-  //   Series(
-  //     name: 'The Witcher',
-  //     note:
-  //         'Geralt of Rivia, a solitary monster hunter finds a child of surprise. He tries to protect her from the evil forces that are after her. Yennefer of Vengerberg, a powerful sorceress, joins Geralt in his quest.',
-  //     rating: 8.2,
-  //     watchingDate: DateTime(2021, 10, 4),
-  //     category: SeriesCategories.adventure,
-  //   ),
-  //   Series(
-  //     name: 'Sherlock',
-  //     note:
-  //         'A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.',
-  //     rating: 9.1,
-  //     watchingDate: DateTime(2021, 10, 5),
-  //     category: SeriesCategories.detective,
-  //   ),
-  // ];
-
   void _showModal() {
     showModalBottomSheet(
       context: context,
@@ -107,11 +68,11 @@ class _MySeriesState extends State<MySeries> {
     );
   }
 
-  void _addSeries(Series newSeries) {
+  void _addSeries(Series newSeries) async {
     setState(() {
       _series.add(newSeries);
     });
-    _fileOperations.writeToFile(jsonEncode(_series));
+    await _fileOperations.writeToFile(jsonEncode(_series));
   }
 
   void _removeSeries(Series series) {
@@ -140,8 +101,8 @@ class _MySeriesState extends State<MySeries> {
           onPressed: () {
             setState(() {
               _series.insert(index, series);
-              _fileOperations.writeToFile(jsonEncode(_series));
             });
+            _fileOperations.writeToFile(jsonEncode(_series));
           },
         ),
       ),

@@ -22,7 +22,7 @@ class FileOperations {
       List<Series> series = [];
       final file = await _localFile;
       final fileContents = await file.readAsString();
-      for(Map<String, dynamic> seriesMap in jsonDecode(fileContents)) {
+      for (Map<String, dynamic> seriesMap in jsonDecode(fileContents)) {
         series.add(Series.fromJson(seriesMap));
       }
       return series;
@@ -35,6 +35,4 @@ class FileOperations {
     final file = await _localFile;
     return file.writeAsString(json);
   }
-
-  
 }

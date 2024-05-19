@@ -30,6 +30,17 @@ class Series {
     required this.category,
   }) : id = uuid.v4();
 
+  Series.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    note = json['note'];
+    rating = json['rating'];
+    watchingDate = DateTime.parse(json['watchingDate']);
+    category = SeriesCategories.values
+        .firstWhere((element) => element.name == [json['category']]);
+    favorite = json['favorite'];
+  }
+
   late String id, name, note;
   late double rating;
   late DateTime watchingDate;
@@ -41,25 +52,13 @@ class Series {
     return formatter.format(watchingDate);
   }
 
-  Series.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    note = json['note'];
-    rating = json['rating'];
-    watchingDate = DateTime.parse(json['watchingDate']);
-    category = SeriesCategories.values.firstWhere((element) => element.name == [json['category']]);
-    favorite = json['favorite'];
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'note': note,
-      'rating': rating,
-      'watchingDate': watchingDate.toString(),
-      'category': category.name,
-      'favorite': favorite,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'note': note,
+        'rating': rating,
+        'watchingDate': watchingDate.toString(),
+        'category': category.name,
+        'favorite': favorite,
+      };
 }

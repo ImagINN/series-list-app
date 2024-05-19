@@ -26,12 +26,6 @@ class _NewSeriesState extends State<NewSeries> {
 
   double _rating = 0;
 
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
-
   void _showDatePicker() async {
     final today = DateTime.now();
     final newDate = await showDatePicker(
@@ -99,6 +93,12 @@ class _NewSeriesState extends State<NewSeries> {
       category: _selectedCategory,
     ));
     Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
   }
 
   @override
